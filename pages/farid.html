@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Farid - Kelompok 4</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/member.css">
+</head>
+<body>
+    <!-- Audio untuk narasi Farid -->
+    <audio id="narasiAudio" preload="auto">
+        <source src="../audio/farid-narasi.mp3" type="audio/mpeg">
+        Browser kamu tidak mendukung audio.
+    </audio>
+
+    <div class="container">
+        <div class="detail-container">
+            <a href="../index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama
+            </a>
+
+            <!-- Kontrol Audio -->
+            <div class="audio-controls">
+                <button id="playBtn" class="audio-btn">
+                    <i class="fas fa-play"></i> Putar Narasi
+                </button>
+                <button id="pauseBtn" class="audio-btn" style="display: none;">
+                    <i class="fas fa-pause"></i> Jeda Narasi
+                </button>
+                <button id="stopBtn" class="audio-btn">
+                    <i class="fas fa-stop"></i> Berhenti
+                </button>
+                <div class="audio-info">
+                    <i class="fas fa-volume-up"></i> Dengarkan profil Farid
+                </div>
+            </div>
+
+            <div class="member-detail">
+                <div class="detail-header">
+                    <div class="detail-photo">
+                        <img src="../img/foto farid.jpg" alt="Foto Farid">
+                    </div>
+                    <div class="detail-info">
+                        <h1>Farid Fadilah</h1>
+                        <div class="detail-hobby">
+                            <i class="fa-regular fa-futbol"></i>
+                            <i class="fa-solid fa-person-hiking"></i>
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-content">
+                    <div class="detail-video">
+                        <h3>Video Hobi Farid</h3>
+                        <video controls>
+                            <source src="../video/farid.mp4" type="video/mp4">
+                            Browser kamu tidak mendukung video.
+                        </video>
+                    </div>
+                    
+                    <div class="detail-description">
+                        <h3>Tentang Farid</h3>
+                        
+                        <p>Halo, gue Farid. Gue suka olahraga, terutama futsal. Biasanya gue main bareng anak-anak kampus, 
+                            dan di situ gue ngerasa futsal jadi tempat paling asik buat ngelepas penat sambil tetap aktif. 
+                            Mainnya santai, tapi tetap ada greget kompetitif yang bikin seru.</p>
+                        <p>Selain futsal, gue juga seneng hiking. Biasanya gue naik gunung bareng temen-temen rumah. 
+                            Buat gue, hiking itu cara buat keluar dari rutinitas, ngeliat alam dari sudut yang lebih luas, 
+                            dan nikmatin perjalanan tanpa buru-buru. Rasanya selalu satisfying tiap berhasil sampai puncak.</p>
+                        
+                        <div class="audio-notice">
+                            <i class="fas fa-headphones"></i>
+                            <p>Tekan tombol "Putar Narasi" di atas untuk mendengarkan versi audio dari profil ini.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('narasiAudio');
+            const playBtn = document.getElementById('playBtn');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const audioInfo = document.querySelector('.audio-info');
+            
+            // Fungsi untuk update tombol
+            function updateButtonStates() {
+                if (audio.paused || audio.ended) {
+                    playBtn.style.display = 'inline-flex';
+                    pauseBtn.style.display = 'none';
+                    audioInfo.innerHTML = '<i class="fas fa-volume-up"></i> Tekan putar untuk mendengarkan narasi';
+                } else {
+                    playBtn.style.display = 'none';
+                    pauseBtn.style.display = 'inline-flex';
+                    audioInfo.innerHTML = '<i class="fas fa-volume-up"></i> Sedang memutar narasi...';
+                }
+            }
+            
+            // Event listeners untuk tombol
+            playBtn.addEventListener('click', function() {
+                audio.play()
+                    .then(() => {
+                        updateButtonStates();
+                        console.log('Audio started playing');
+                    })
+                    .catch(error => {
+                        console.log('Error playing audio:', error);
+                        audioInfo.innerHTML = '<i class="fas fa-exclamation-circle"></i> Klik izinkan jika ada permintaan autoplay';
+                    });
+            });
+            
+            pauseBtn.addEventListener('click', function() {
+                audio.pause();
+                updateButtonStates();
+            });
+            
+            stopBtn.addEventListener('click', function() {
+                audio.pause();
+                audio.currentTime = 0;
+                updateButtonStates();
+            });
+            
+            // Update state ketika audio berakhir
+            audio.addEventListener('ended', function() {
+                updateButtonStates();
+                audioInfo.innerHTML = '<i class="fas fa-volume-up"></i> Narasi selesai';
+            });
+            
+            // Update state ketika ada error
+            audio.addEventListener('error', function() {
+                audioInfo.innerHTML = '<i class="fas fa-exclamation-triangle"></i> File audio tidak ditemukan';
+                playBtn.disabled = true;
+            });
+            
+            // Update state awal
+            updateButtonStates();
+        });
+    </script>
+</body>
+</html>

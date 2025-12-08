@@ -1,0 +1,347 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #021024 0%, #041B3F 50%, #5484B3 75%, #7DA0CA 94%, #C1E8FF 100%);
+  color: #fff;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ================= HOME SECTION ================= */
+/* ================= HOME SECTION ================= */
+.home {
+  width: 100%;
+  height: 600px;
+  margin-bottom: 40px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(2, 16, 36, 0.3);
+  position: relative;
+}
+
+.home video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom; 
+  display: block;
+  border-radius: 20px;
+}
+
+/* Gradient overlay */
+.home::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, 
+      transparent 0%, 
+      rgba(2, 16, 36, 0.1) 20%,
+      rgba(2, 16, 36, 0.3) 40%,
+      rgba(2, 16, 36, 0.6) 70%,
+      rgba(2, 16, 36, 0.9) 100%);
+  z-index: 1;
+  border-radius: 0 0 20px 20px;
+  pointer-events: none;
+}
+
+/* HANYA UNTUK MOBILE - perbaikan crop */
+@media (max-width: 768px) {
+  .home video {
+      object-fit: contain; /* Ganti ke contain hanya di mobile */
+      object-position: center center; /* Posisi tengah */
+      background-color: #021024; /* Background untuk area kosong */
+  }
+  
+  .home {
+      background-color: #021024; /* Background container juga */
+  }
+}
+
+/* Untuk ukuran mobile lebih kecil */
+@media (max-width: 576px) {
+  .home {
+      height: 280px;
+  }
+  
+  .home::after {
+      height: 80px;
+  }
+}
+
+@media (max-width: 400px) {
+  .home {
+      height: 230px;
+  }
+  
+  .home::after {
+      height: 60px;
+  }
+}
+
+/* ================= TEAM GALLERY ================= */
+.team-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+  justify-items: center;
+}
+
+.member-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(2, 16, 36, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+/* Special case for odd number of cards */
+.team-gallery:has(.member-card:nth-last-child(1):nth-child(3)) {
+  grid-template-columns: 1fr 1fr;
+}
+
+.team-gallery:has(.member-card:nth-last-child(1):nth-child(3)) .member-card:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 500px;
+}
+
+/* Animation delays for cards */
+.member-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.member-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.member-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.member-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.member-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(2, 16, 36, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ================= MEMBER PHOTO ================= */
+.member-photo {
+  width: 100%;
+  height: 280px;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.member-card:hover .member-photo img {
+  transform: scale(1.1);
+}
+
+/* ================= MEMBER NAME OVERLAY ================= */
+.member-name-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(2, 16, 36, 0.9));
+  padding: 20px;
+  z-index: 2;
+}
+
+.member-name-overlay h2 {
+  font-size: 1.8rem;
+  color: #C1E8FF;
+  margin-bottom: 5px;
+}
+
+.hobby-tag {
+  display: inline-block;
+  background: rgba(193, 232, 255, 0.2);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  border: 1px solid rgba(193, 232, 255, 0.3);
+}
+
+/* ================= MEMBER INFO ================= */
+.member-info {
+  padding: 25px;
+}
+
+.member-hobby {
+  color: #7DA0CA;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.member-hobby i {
+  margin-right: 10px;
+  font-size: 1.3rem;
+  color: #C1E8FF;
+}
+
+.member-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+/* ================= DETAIL BUTTON ================= */
+.detail-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #7DA0CA 0%, #5484B3 100%);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(2, 16, 36, 0.3);
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+}
+
+.detail-btn:hover {
+  background: linear-gradient(135deg, #5484B3 0%, #7DA0CA 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(2, 16, 36, 0.4);
+}
+
+.detail-btn i {
+  margin-right: 8px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.copyright {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE DESIGN ================= */
+@media (max-width: 768px) {
+  .team-gallery {
+      grid-template-columns: 1fr;
+      gap: 20px;
+  }
+  
+  .team-gallery:has(.member-card:nth-last-child(1):nth-child(3)) .member-card:last-child {
+      grid-column: 1;
+      max-width: 100%;
+  }
+  
+  .member-card {
+      max-width: 100%;
+  }
+  
+  .home {
+      height: 350px;
+  }
+  
+  .member-photo {
+      height: 250px;
+  }
+  
+  .container {
+      padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-gallery {
+      grid-template-columns: 1fr;
+      gap: 15px;
+  }
+  
+  .home {
+      height: 250px;
+      border-radius: 10px;
+  }
+  
+  .home video {
+      border-radius: 10px;
+  }
+  
+  .home::after {
+      border-radius: 0 0 10px 10px;
+  }
+  
+  .member-info {
+      padding: 20px;
+  }
+  
+  .member-name-overlay h2 {
+      font-size: 1.5rem;
+  }
+  
+  .member-description {
+      font-size: 0.95rem;
+  }
+  
+  .detail-btn {
+      padding: 10px 20px;
+      font-size: 0.95rem;
+  }
+}
