@@ -206,32 +206,104 @@ body {
     font-size: 2.5rem;
     margin-bottom: 10px;
     text-shadow: 0 0 10px rgba(193, 232, 255, 0.3);
+    white-space: nowrap;
 }
 
 .detail-hobby {
     font-size: 1.2rem;
     color: #7DA0CA;
-    display: flex;
-    align-items: center;
-    gap: 15px;
     margin-top: 10px;
+}
+
+/* Container untuk ikon saja */
+.detail-hobby-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 .detail-hobby i {
     font-size: 1.5rem;
     color: #C1E8FF;
     transition: transform 0.3s ease;
+    min-width: 30px;
+    text-align: center;
 }
 
 .detail-hobby i:hover {
     transform: scale(1.2);
 }
 
+/* Text hobi (Band Musik) */
 .detail-hobby span {
+    display: block;
     background: rgba(193, 232, 255, 0.1);
-    padding: 5px 15px;
+    padding: 8px 20px;
     border-radius: 20px;
     border: 1px solid rgba(193, 232, 255, 0.3);
+    text-align: center;
+    margin-top: 5px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .detail-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .detail-hobby-icons {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .detail-hobby i {
+        font-size: 1.8rem;
+    }
+    
+    .detail-info h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .detail-info h1 br {
+        display: none; /* Hilangkan line break di mobile */
+    }
+}
+
+@media (max-width: 576px) {
+    .detail-hobby-icons {
+        gap: 15px;
+    }
+    
+    .detail-hobby i {
+        font-size: 1.6rem;
+    }
+    
+    .detail-hobby span {
+        font-size: 1rem;
+        padding: 6px 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .detail-hobby-icons {
+        gap: 10px;
+    }
+    
+    .detail-hobby i {
+        font-size: 1.4rem;
+    }
+    
+    .detail-hobby span {
+        font-size: 0.95rem;
+        padding: 5px 12px;
+    }
 }
 
 .detail-content {
